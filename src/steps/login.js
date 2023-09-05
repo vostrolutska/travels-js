@@ -1,16 +1,23 @@
 /* eslint-disable no-undef */
-import { Given, When, Then } from '@wdio/cucumber-framework';
+import { Given, When, Then } from "@wdio/cucumber-framework";
+import LoginPage from "../pages/login.page.js";
 
-Given('User is on the Login page', async () => {
-  await browser.setWindowSize(1920, 1080);
-  await browser.url("https://phptravels.net/login");
+Given("User is on the Login page", async () => {
+  await LoginPage.open();
 });
 
-When('User clicks on the Signup link', async () => {
-  const link = await browser.$('#login a.btn-outline-primary');
-  await link.click();
+When("User types in {string} as invalid email", async (email) => {
+  await LoginPage.userEmail.setValue(email);
 });
 
-Then('User should be on the Signup page', async () => {
-  await browser.url("https://phptravels.net/signup");
+When("User types in {string} as invalid password", async (password) => {
+  await LoginPage.loginPassword.setValue(password);
+});
+
+When("User clicks on the Login button", async () => {
+  await LoginPage.submit();
+});
+
+Then("User should see an error pop-up on the Login page", async () => {
+  await LoginPage.errorPopup.waitForDisplayed();
 });

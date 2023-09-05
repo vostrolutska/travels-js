@@ -87,7 +87,7 @@ export const config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: "http://localhost",
+  baseUrl: "https://www.phptravels.net",
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -246,6 +246,7 @@ export const config = {
    * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
    * @param {object}                 context  Cucumber World object
    */
+  // eslint-disable-next-line no-unused-vars
   // beforeScenario: function (world, context) {
   // },
   /**
@@ -255,8 +256,11 @@ export const config = {
    * @param {IPickle}            scenario scenario pickle
    * @param {object}             context  Cucumber World object
    */
-  // beforeStep: function (step, scenario, context) {
-  // },
+  // eslint-disable-next-line no-unused-vars
+  beforeStep: async function (step, scenario, context) {
+    // eslint-disable-next-line no-undef
+    await browser.setWindowSize(1920, 1080);
+  },
   /**
    *
    * Runs after a Cucumber Step.
